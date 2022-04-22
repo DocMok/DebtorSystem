@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DebtorController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Auth::routes();
 
-})->name('index');
+Route::get('/', [DebtorController::class, 'index'])->name('index');

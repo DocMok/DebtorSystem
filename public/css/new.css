@@ -1,0 +1,225 @@
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+    transition-duration: .25s;
+}
+.menu__box {
+    transition-duration: .25s;
+}
+.menu__item {
+    transition-duration: .25s;
+}
+
+.hamburger-menu {
+    position: fixed;
+    z-index: 1000;
+}
+
+/* скрываем чекбокс */
+#menu__toggle {
+    opacity: 0;
+}
+/* стилизуем кнопку */
+.menu__btn {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    margin-left: 28px;
+    left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+}
+/* добавляем "гамбургер" */
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+}
+.menu__btn > span::before {
+    content: '';
+    top: -8px;
+}
+.menu__btn > span::after {
+    content: '';
+    top: 8px;
+}
+/* контейнер меню */
+.menu__box {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    text-align: center;
+    background-color: #ECEFF1;
+    box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+}
+/* элементы меню */
+.menu__item {
+    display: block;
+    padding: 12px 24px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+.menu__item:hover {
+    background-color: #CFD8DC;
+}
+
+#menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+}
+#menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+}
+#menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    left: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.mainContent {
+    background-image: url(https://aisoip.adilet.gov.kz/img/main_bg.9c87c421.png);
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    font-family: Roboto, sans-serif;
+}
+
+.contentWrapper {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+.contentWrapper-txt {
+    font-size: 42px;
+    line-height: 50px;
+}
+
+.contentWrapper-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contentWrapper-item {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.contentWrapper-item p {
+    padding-left: 25px;
+    font-size: 24px;
+}
+
+.oval {
+    font-size: 32px;
+    color: #09405a;
+    width: 161px;
+    height: 161px;
+    border-radius: 150px;
+    background: hsla(0, 0%, 100%, .4);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.black-info {
+    background: rgba(0, 0, 0, 0.36);
+}
+
+.black-infoWrapper {
+    padding-left: 320px;
+    padding-right: 320px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.black-info-leftSide-title {
+    font-size: 24px;
+}
+
+.black-info-leftSide-bottomTxt {
+    font-size: 20px;
+}
+
+.black-info-leftSide {
+    position: relative;
+}
+
+.black-info-rightSide {
+    position: relative;
+}
+
+.black-info-rightSide:before {
+    content: " ";
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAA7CAYAAAAkTufiAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAPSSURBVHgB5VuLceMgEF2nApVAB3EJ7uDSgZ0KLldBfBXYHThXQa4D+ypwUgFOBXEH72CEJgpafRCLjJM3s0PiQQ94sIvEZ0aJAECZZGHs1pj9e26scFbhbOzk0hdnr7PZ7IWuFabhC2MbY++Igza2s3x0DTAVLYw9uoqngDa2RDmyJOtsO6ygGNQaH9vrIWI8UiScoO81zmJGI4BymO6o9PU2VH7+Sh/+bn87G58/Ox7lOGyPWM5bl3bhZOyX4fhL4fVemuTJ+/meQuB6f9PTY3tEDDVXxp2xp55ygvjdCOCgQkiUsWMLkR1ea8T6GF/mFny8uQvgWbbUez2Uw5LM0R74ttKNZ8q3YtRHhh7ag5ICcMFPY+IpzImxGip6agGekbj3YyElgALvAsNJLgQRARzRtxdg890FWDAkz5Q5xARwZNojsf9//SBYI/vJECnKGNICFMwo2FHGEBXAEa7QdANFmUJcAEeqPbINZYpUAnAzgqIMkUQAR7zzCEfFApSBVaP8nFYkjGQCOHLtkQ7+TK1xKI9DQ3ZJbJlSgLnPSiPA8UgJkVQAV4A/K+xpJMCvBukYIZIL4ArZSpJLCiEhAEo3Lfoy7b0CguMBwxkthJAA9Q/Bh66M/rrhggQQI4SQAIVfdldmf+VIkRDGCAGhGIDmbPXelfkTSBghQkA4CA5u2+CMERgiBBLMAqNFQKK1gy4hkGgaDBEhWUxgymoTIoUAQTHBr8ScEgL922vRArhyFh7nsS3vDZUbpXUkFcFspK5M8qcjy2+TZ03x8N363JbRivDm/ZZUBIsOIaQEsPDb8dqaE4LfDqHA51f2BxIEmm/Cy67MjQCCCVeXUX59ipfHxJl53wP+DLGgKwbK8w116K78Ny71/TP6WMyF8cP7/9D7BPg1xqw3XNrAuPfwkY3m+8KarhBo7qPqkIfXuGCAlAD44wTLEIICzQCZ7d4DBzRXzXVwRzKjYbg/XRjgY0H4uwf4/chwNSdGW71pLMDPFLlvzD6Lj2A0V6Atsnx3QHm02MeWYuGG1zF3IVoEGO8GTAHcdJONEG0CQHpRCBmeY3SjlIsBtp5plgHQfaJV0YRAGbT1pALUCu8627xLLQa6T9fr5ALUKqI6hNCukooEgf6LJUfgAodJwE+f/sgYvZ+Jj6s5+55yxE7Xp7z5YnEw9o8+br2czBriyXFUN+Os2eF869Lq1lwb7PP3hudAOcA05AHpLoD5SHKxRAQoh+8qoRg628ZzQOnLT4gXxPa69fkFTYBRMWEIUE5blVl/tz2pqHlDtro19+bSQxU3psJ/9gYGgpB08EUAAAAASUVORK5CYII=);
+    width: 65px;
+    height: 59px;
+    position: absolute;
+    margin-left: -85px;
+    margin-top: 20px;
+}
+
+
+.black-info-leftSide:before {
+    z-index: 0;
+    content: " ";
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAABECAYAAAAshg1TAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAItSURBVHgB7ZuNccIwDIUVrgPQDcIELRvQTdigdAJggpYNOgIjdAPYgHQC2ECVanMHIkBkjC3u/N35QsiP/WLHT3EcAA8i9ilNKW0wD58QAzpRnVHEIVO4FbQhZE+4IDp4jPYIE0QHrsSJvij1IQGUz3dUQfIMkJArYtSCemK9gbzsxPpMI6gHtpjA6QXtLMiamF9KbxAoyJoYqKqqgUBB5sQwoYJMimFCBJkVw2gFmRbDaARZE/Pa9mdnQcJxN5AQym8i86c0QhfFtyXetj0XKVQihGnoKgwgEehiQL6AMWLBj6w1w7TUTijb7GK8oBlGIGszE4L45ufY7AW6N7taniR7zYQia8a8z2goYqxSxFiliLHKEyih7vwdnLndEx6lmZOBLzUHqSIA2rUGFxim4pnKszu3UZRd3cySjHQeUGt2Vomhq7SmxQLSsPD5dSYo0ET3HHLXWvJPl9fKcdTM1B2Az4jb8Q6MUXzGKpZ9ZknNea45qPhMQmrNzsVnis8koPiMVYrPQDoGlzqCR/MZVX6WfWau9Zky1myVIsYqajHsM3j7zEF+yRpnTqYoXOcOAN0b35iMIF7Zs3cAUX1L6zMNLVQhxgV+tMOvV0FFM7OGtWYWlSLGKkWMVeTDGXNx4M0SsuxcM/KZYYqJps+Hgu7zGBkOrblmZvTj9k898jOufC2sQDkUaoz/sYuevz/a5j8+Cg248rvezMdcQ+Cpgaf3kFUacHHicD+C8wdiM43GH+ZPkwAAAABJRU5ErkJggg==);
+    width: 51px;
+    height: 67px;
+    position: absolute;
+    margin-left: -85px;
+    margin-top: 20px;
+}
+
+.ovalTwo {
+    margin-left: 31px;
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    border-radius: 150px;
+    background: hsla(0, 0%, 100%, .4);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.fileUploadTop {
+    margin-top: 10px;
+}

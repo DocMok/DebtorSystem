@@ -37,6 +37,9 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::get('user/create', [UserControler::class, 'create'])->name('user.create');
     Route::post('user/store', [UserControler::class, 'store'])->name('user.store');
     Route::get('user/index', [UserControler::class, 'index'])->name('user.index');
+    Route::get('user/delete', [UserControler::class, 'delete'])->name('user.delete');
+    Route::get('user/edit', [UserControler::class, 'edit'])->name('user.edit');
+    Route::get('user/update', [UserControler::class, 'update'])->name('user.update');
 
 
     Route::post('file/store', [FileController::class, 'store'])->name('file.store');

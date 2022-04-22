@@ -32,12 +32,25 @@
             <tr>
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
-                <td>{{$user->mail}}</td>
+                <td>{{$user->email}}</td>
                 <td>
-                    <i class="fas fa-eye"></i>
-                    <i class="fas fa-pencil-alt mr-1"></i>
-                    <i class="fas fa-trash"></i>
-                    <i class="far fa-fw fa-file-word"></i>
+
+                <form class='card-title' method=get
+                      action="{{route('user.edit', $user->id)}}" style="margin:2px;">
+                    @csrf
+                    <button class=" btn btn-block btn-dark btn-sm" type="submit">
+                        <i class="fas fa-pencil-alt mr-1"></i>
+                    </button>
+                </form>
+
+                <form class='card-title' method=post
+                      action="{{route('user.delete', $user->id)}}" style="margin:2px;">
+                    {{method_field('delete')}}
+                    @csrf
+                    <button class="btn btn-block btn-danger btn-sm" type="submit">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
                 </td>
         @endforeach
 

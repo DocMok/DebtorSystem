@@ -29,5 +29,8 @@ class UserControler extends Controller
         $users = User::paginate(20);
         return view('user.index', compact('users'));
     }
-
+public function edit(User $user)
+{
+    return view('user.edit', compact('user'));
+}
 }

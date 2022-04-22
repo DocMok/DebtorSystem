@@ -24,4 +24,10 @@ class UserControler extends Controller
     return redirect(route('index'));
     }
 
+    public function index()
+    {
+        $users = User::paginate(20);
+        return view('user.index', compact('users'));
+    }
+
 }

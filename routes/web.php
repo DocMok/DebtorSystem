@@ -25,12 +25,18 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::get('/', [DebtorController::class, 'index'])->name('index');
     Route::get('/debtor/create', [DebtorController::class, 'create'])->name('debtor.create');
     Route::post('/debtor/store', [DebtorController::class, 'store'])->name('debtor.store');
+    Route::get('/debtor/index', [DebtorController::class, 'index'])->name('debtor.index');
+
+
+    Route::get('user/create', [UserControler::class, 'create'])->name('user.create');
+    Route::post('user/store', [UserControler::class, 'store'])->name('user.store');
+    Route::get('user/index', [UserControler::class, 'index'])->name('user.index');
+
 
 });
 
 Route::prefix('user')->group(function (){
-    Route::get('/create', [UserControler::class, 'create'])->name('user.create');
-    Route::post('/store', [UserControler::class, 'store'])->name('user.store');
+
 });
 
 

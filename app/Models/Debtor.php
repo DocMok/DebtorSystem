@@ -14,4 +14,7 @@ class Debtor extends Model
     {
         return $this->hasMany(File::class);
     }
+
+
 }
+

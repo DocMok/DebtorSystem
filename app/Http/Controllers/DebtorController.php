@@ -16,7 +16,7 @@ class DebtorController extends Controller
     public function index()
     {
         $debtors = Debtor::paginate(20);
-        return view('dashboard', compact('debtors'));
+        return view('debtor.index', compact('debtors'));
     }
 
     public function create()
@@ -52,6 +52,7 @@ class DebtorController extends Controller
 
             }
         }
+        return redirect(route('index'));
     }
 
     public function edit(Debtor $debtor)

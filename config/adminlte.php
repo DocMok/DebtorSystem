@@ -226,14 +226,14 @@ return [
 
     'menu' => [
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'users',
+            'url'  => "dashboard/user/index",
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'debtors',
+            'url'  => "dashboard/debtor/index",
+            'icon' => 'fas fa-fw fa-user',
         ],
 
 

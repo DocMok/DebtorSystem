@@ -6,7 +6,7 @@ use App\Http\Requests\DebtorStoreRequest;
 use App\Http\Requests\DebtorUpdateRequest;
 use App\Http\Traits\ApiResponsable;
 use App\Models\Debtor;
-use http\Env\Request;
+use Illuminate\Support\Facades\Request;
 
 class DebtorController extends Controller
 {
@@ -44,9 +44,9 @@ class DebtorController extends Controller
 
     public function search(Request $request)
     {
-        $debtors = Debtor::where('name', $request)->
-        orWhere('iin', $request)->
-        orWhere('nip', $request)->
+        $debtors = Debtor::where('name', 'like', $request)->
+        orWhere('iin', 'like', $request)->
+        orWhere('bin', 'like', $request)->
         get();
 
         return $this->successResponse($debtors);

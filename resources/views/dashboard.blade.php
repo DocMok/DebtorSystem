@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <div class="row">
+    <div class="row ">
         <div class="col-12">
             <div class="card" bis_skin_checked="1">
                 <div class="card-header" bis_skin_checked="1">
@@ -19,6 +19,12 @@
                         <div class="row mb-4">
                             <div class="col-2">
                                 <a href="{{route('debtor.create')}}" class="btn btn-block btn-primary">Добавить должника</a>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-2">
+                                <a href = "{{route('user.create')}}"  type="button" class="btn btn-block btn-primary">Добавить пользователя</a>
                             </div>
                         </div>
                     @endif
@@ -88,4 +94,6 @@
             </div>
         </div>
     </div>
+
+
 @stop

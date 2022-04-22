@@ -19,6 +19,13 @@ class DebtorController extends Controller
         return view('debtor.index', compact('debtors'));
     }
 
+    public function show(Debtor $debtor)
+    {
+
+        $files = $debtor->files()->get();
+        return view('debtor.show', compact('debtor','files'));
+    }
+
     public function create()
     {
         return view('debtor.create');

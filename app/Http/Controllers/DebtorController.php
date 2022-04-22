@@ -14,7 +14,7 @@ class DebtorController extends Controller
     public function index()
     {
         $debtors = Debtor::paginate(20);
-        return view('index', compact('debtors'));
+        return view('dashboard', compact('debtors'));
     }
 
     public function store(DebtorStoreRequest $request)

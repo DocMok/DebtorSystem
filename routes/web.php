@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DebtorController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [DebtorController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->prefix('dashboard')->group(function() {
+    Route::get('/', [DebtorController::class, 'index'])->name('index');
+});

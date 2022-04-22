@@ -6,6 +6,7 @@ use App\Http\Requests\DebtorStoreRequest;
 use App\Http\Requests\DebtorUpdateRequest;
 use App\Http\Traits\ApiResponsable;
 use App\Models\Debtor;
+use http\Env\Request;
 
 class DebtorController extends Controller
 {
@@ -39,5 +40,15 @@ class DebtorController extends Controller
     {
         $debtor->delete();
         return redirect(route('index'));
+    }
+
+    public function search(Request $request)
+    {
+        $debtors = Debtor::where('name', $request)->
+        orWhere('iin', $request)->
+        orWhere('nip', $request)->
+        get();
+
+        return $this->successResponse($debtors);
     }
 }

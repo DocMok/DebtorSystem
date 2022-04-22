@@ -6,6 +6,7 @@ use App\Http\Requests\DebtorStoreRequest;
 use App\Http\Requests\DebtorUpdateRequest;
 use App\Http\Traits\ApiResponsable;
 use App\Models\Debtor;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class DebtorController extends Controller
@@ -25,10 +26,32 @@ class DebtorController extends Controller
 
     public function store(Request $request)
     {
-        dd($request, $request->files);
-        Debtor::create([
-
+        //dd($request, $request->files);
+        $debtor = Debtor::create([
+            'name' => $request->name,
+            'iin' => $request->iin,
+            'address' => $request->address,
+            'chsi' => $request->chsi,
+            'nip' => $request->nip,
+            'start_date' => $request->start_date,
+            'debit_sum' => $request->debit_sum,
+            'account_block_name' => $request->account_block_name,
+            'arrest_to' => $request->arrest_to,
+            'bin' => $request->bin,
         ]);
+
+        if ($request->file('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $documentPath = $document->store($debtor->id, ['disk' => 'public']);
+                if ($documentPath) {
+                    File::create([
+                        'path' => $documentPath,
+                        'debtor_id' => $debtor->id,
+                    ]);
+                }
+
+            }
+        }
     }
 
     public function edit(Debtor $debtor)

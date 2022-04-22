@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Добавление должника</h3>
                 </div>
-                <form action="{{route('debtor.store')}}" enctype="multipart/form-data">
+                <form action="{{route('debtor.store')}}" method=post enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -53,8 +53,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="iin">Номер исполнительного производства</label>
-                                    <input type="text" class="form-control" id="iin" name="iin"
+                                    <label for="nip">Номер исполнительного производства</label>
+                                    <input type="text" class="form-control" id="nip" name="nip"
                                            placeholder="Номер исполнительного производства">
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DebtorController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserControler;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,9 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::post('/debtor/store', [DebtorController::class, 'store'])->name('debtor.store');
     Route::get('/debtor/index', [DebtorController::class, 'index'])->name('debtor.index');
     Route::get('/debtor/show/{debtor}', [DebtorController::class, 'show'])->name('debtor.show');
+    Route::get('/debtor/edit/{debtor}', [DebtorController::class, 'edit'])->name('debtor.edit');
+    Route::put('/debtor/update/', [DebtorController::class, 'update'])->name('debtor.update');
+    Route::delete('/debtor/delete/{debtor}', [DebtorController::class, 'destroy'])->name('debtor.delete');
 
 
 
@@ -35,7 +39,15 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::get('user/index', [UserControler::class, 'index'])->name('user.index');
 
 
+    Route::post('file/store', [FileController::class, 'store'])->name('file.store');
+    Route::delete('file/delete/', [FileController::class, 'destroy'])->name('file.delete');
+
 });
+
+Route::middleware(['auth'])->get('/csrf', function(){
+    return csrf_token();
+})->name('csrf');
+
 
 Route::prefix('user')->group(function (){
 

@@ -23,8 +23,16 @@ class DebtorController extends Controller
     {
 
         $files = $debtor->files()->get();
-        return view('debtor.show', compact('debtor','files'));
+        return view('debtor.show', compact('debtor', 'files'));
     }
+
+    public function edit(Debtor $debtor)
+    {
+
+        $files = $debtor->files()->get();
+        return view('debtor.edit', compact('debtor', 'files'));
+    }
+
 
     public function create()
     {
@@ -33,7 +41,6 @@ class DebtorController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request, $request->files);
         $debtor = Debtor::create([
             'name' => $request->name,
             'iin' => $request->iin,
@@ -62,14 +69,24 @@ class DebtorController extends Controller
         return redirect(route('index'));
     }
 
-    public function edit(Debtor $debtor)
-    {
-        return $this->successResponse($debtor);
-    }
 
-    public function update(DebtorUpdateRequest $request)
+    public function update(Request $request)
     {
-        dd($request);
+        $debtor = Debtor::findOrFail($request->debtor_id);;
+
+        $debtor->update([
+            'name' => $request->name,
+            'iin' => $request->iin,
+            'address' => $request->address,
+            'chsi' => $request->chsi,
+            'nip' => $request->nip,
+            'start_date' => $request->start_date,
+            'debit_sum' => $request->debit_sum,
+            'account_block_name' => $request->account_block_name,
+            'arrest_to' => $request->arrest_to,
+            'bin' => $request->bin,
+        ]);
+        return redirect(route('debtor.index'));
     }
 
     public function destroy(Debtor $debtor)

@@ -150,27 +150,8 @@
 
         </div>
     </div>
-
-{{--    <div class="modal fade" id="modal" style="display: none; padding-right: 15px;" aria-modal="true" role="dialog">
-        <div class="modal-dialog">
-        <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-        <div>
-            @foreach($files as $file)
-                <div class="justify-content-center">
-                    <a class="img-thumbnail w-100" title="preview"
-                       href="{{url('storage/'.$file->path)}}">{{$file->path}} </a>
-                </div>
-            @endforeach
-        </div>
-        <div class="modal-footer justify-content-between" bis_skin_checked="1">
-            <button type="button" class="btn btn-default close-modal" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-    </div>--}}
-
 @endsection
+
 @section('js')
     <script>
         $('#show-files').click(showModal)

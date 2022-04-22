@@ -6,7 +6,7 @@ use App\Http\Requests\DebtorStoreRequest;
 use App\Http\Requests\DebtorUpdateRequest;
 use App\Http\Traits\ApiResponsable;
 use App\Models\Debtor;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class DebtorController extends Controller
 {
@@ -18,9 +18,14 @@ class DebtorController extends Controller
         return view('dashboard', compact('debtors'));
     }
 
-    public function store(DebtorStoreRequest $request)
+    public function create()
     {
-        dd($request);
+        return view('debtor.create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request, $request->files);
         Debtor::create([
 
         ]);

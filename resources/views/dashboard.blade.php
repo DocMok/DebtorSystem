@@ -18,7 +18,7 @@
                     @if(Auth::user() && Auth::user()->is_admin)
                         <div class="row mb-4">
                             <div class="col-2">
-                                <button type="button" class="btn btn-block btn-primary">Добавить должника</button>
+                                <a href="{{route('debtor.create')}}" class="btn btn-block btn-primary">Добавить должника</a>
                             </div>
                         </div>
                     @endif

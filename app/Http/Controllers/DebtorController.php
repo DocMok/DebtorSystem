@@ -125,7 +125,7 @@ class DebtorController extends Controller
                 [Carbon::parse($request->start_date)->startOfDay(),
                     Carbon::parse($request->end_date)->endOfDay()])->get();
         $headers = [
-            'ФИО должника', 'ИИН должника', 'Адрес должника','Наименование органа (ЧСИ)',
+            'ФИО должника', 'ИИН должника', 'Адрес должника', 'Наименование органа (ЧСИ)',
             'БИН органа', 'Номер исполнительного производства', 'Дата вступления в силу',
             'Сумма задолженности', 'Наименование блокировки счета',
             'Арест в пользу'];
@@ -144,5 +144,27 @@ class DebtorController extends Controller
         $writer->save($resource);
         Storage::disk('public')->put("export/debtors.xlsx", $resource);
         return Storage::disk('public')->download("export/debtors.xlsx");
+    }
+
+    public function exportDebtor(Debtor $debtor)
+    {
+        $headers = [
+            'ФИО должника', 'ИИН должника', 'Адрес должника', 'Наименование органа (ЧСИ)',
+            'БИН органа', 'Номер исполнительного производства', 'Дата вступления в силу',
+            'Сумма задолженности', 'Наименование блокировки счета',
+            'Арест в пользу'];
+
+        $spreadsheet = new Spreadsheet();
+        $data[] = $headers;
+        $data[] = [$debtor->name, $debtor->iin, $debtor->address, $debtor->chsi, $debtor->bin, $debtor->nip,
+            $debtor->start_date, $debtor->debit_sum, $debtor->account_block_name, $debtor->arrest_to];
+
+        $spreadsheet->getActiveSheet()->setTitle('Должники')->fromArray($data);
+        $resource = tmpfile();
+
+        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save($resource);
+        Storage::disk('public')->put("export/debtor-$debtor->id.xlsx", $resource);
+        return Storage::disk('public')->download("export/debtor-$debtor->id.xlsx");
     }
 }

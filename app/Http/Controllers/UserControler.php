@@ -53,4 +53,14 @@ class UserControler extends Controller
         $user->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+
+        $users = User::where('name', 'like', "%$request->search%")->
+        orWhere('email', 'like', "%$request->search%")->
+        get();
+
+        return view('user.index', compact('users'));
+    }
 }

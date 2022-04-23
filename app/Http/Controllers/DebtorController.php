@@ -98,9 +98,9 @@ class DebtorController extends Controller
     public function search(Request $request)
     {
 
-        $debtors = Debtor::where('name', 'like', $request->search)->
-        orWhere('iin', 'like', $request->search)->
-        orWhere('bin', 'like', $request->search)->
+        $debtors = Debtor::where('name', 'like', "%$request->search%")->
+        orWhere('iin', 'like', "%$request->search%")->
+        orWhere('bin', 'like', "%$request->search%")->
         get();
 
         return view('debtor.index', compact('debtors'));

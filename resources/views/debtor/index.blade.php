@@ -17,6 +17,34 @@
 @stop
 
 @section('content')
+    <div class="row">
+        <div class="col-md-6 ">
+            <form action="{{route("debtor.search")}}" method=get>
+                @csrf
+                <div class="input-group">
+                    <input type="search" class="form-control form-control-md" name="search" placeholder="Поиск должника">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-md btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 ">
+            <form action="simple-results.html">
+                <div class="input-group">
+                    <input type="search" class="form-control form-control-md" placeholder="Type your keywords here">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-md btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <table class="table table-bordered">
         <thead>
         <tr>

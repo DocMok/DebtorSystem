@@ -31,6 +31,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::get('/debtor/edit/{debtor}', [DebtorController::class, 'edit'])->name('debtor.edit');
     Route::put('/debtor/update/', [DebtorController::class, 'update'])->name('debtor.update');
     Route::delete('/debtor/delete/{debtor}', [DebtorController::class, 'destroy'])->name('debtor.delete');
+    Route::get('/debtor/search', [DebtorController::class, 'search'])->name('debtor.search');
 
 
 

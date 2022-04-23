@@ -17,12 +17,12 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" value="{{$user->password}}"">
+                <input type="password" name="password" class="form-control" id="password">
             </div>
         </div>
-
+        <input type='hidden' name="user_id" value="{{$user->id}}">
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
         </div>
     </form>
 @endsection

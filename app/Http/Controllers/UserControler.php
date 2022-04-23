@@ -21,7 +21,7 @@ class UserControler extends Controller
             'password' => bcrypt($request->password),
             'is_admin' => 0
         ]);
-    return redirect(route('index'));
+        return redirect(route('index'));
     }
 
     public function index()
@@ -29,8 +29,28 @@ class UserControler extends Controller
         $users = User::paginate(20);
         return view('user.index', compact('users'));
     }
-public function edit(User $user)
-{
-    return view('user.edit', compact('user'));
-}
+
+    public function edit(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+        if($request->password){
+            $user->update([ 'password' => bcrypt($request->password)]);
+        }
+        return redirect(route('user.index'));
+    }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->back();
+    }
 }

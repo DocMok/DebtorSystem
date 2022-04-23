@@ -72,7 +72,7 @@ class DebtorController extends Controller
 
     public function update(Request $request)
     {
-        $debtor = Debtor::findOrFail($request->debtor_id);;
+        $debtor = Debtor::findOrFail($request->debtor_id);
 
         $debtor->update([
             'name' => $request->name,

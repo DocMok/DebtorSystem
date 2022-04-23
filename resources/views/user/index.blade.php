@@ -41,6 +41,7 @@
                     <button class=" btn btn-block btn-dark btn-sm" type="submit">
                         <i class="fas fa-pencil-alt mr-1"></i>
                     </button>
+                    <input type='hidden' name="user_id" value="{{$user->id}}">
                 </form>
 
                 <form class='card-title' method=post

@@ -35,17 +35,20 @@
             </form>
         </div>
         <div class="col-6 row offset-2">
-            <a id="filter" href="{{route('debtor.filter')}}?">Filter</a>
-            <a id="exportByDate" href="{{route('debtor.exportByDate')}}?">Filter</a>
+            <a id="filter" class="btn btn-sm " href="{{route('debtor.exportByDate')}}?">export</a>
             <div class="form-group">
-                <div class="input-group">
+                <div class="input-group offset-1">
                     <div id="reportrange"
                          style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                         <i class="fa fa-calendar"></i>&nbsp;
                         <span></span> <i class="fa fa-caret-down"></i>
+                        <a id="exportByDate" href="{{route('debtor.filter')}}?" class="btn btn-sm ">
+                            <i class="fa fa-search"></i>
+                        </a>
                     </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
     </div>
 
     </div>

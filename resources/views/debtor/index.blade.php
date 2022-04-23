@@ -37,7 +37,6 @@
         <div class="col-6 row offset-2">
             <a id="filter" href="{{route('debtor.filter')}}?">Filter</a>
             <a id="exportByDate" href="{{route('debtor.exportByDate')}}?">Filter</a>
-
             <div class="form-group">
                 <div class="input-group">
                     <div id="reportrange"
@@ -144,7 +143,7 @@
                 let href = $('#filter');
                 let hrefExport = $('#exportByDate')
                 let oldUrl = href.attr("href"); // Get current url
-                let oldurlExport = hrefExport.attr("href");
+                let oldUrlExport = hrefExport.attr("href");
                 let newUrl = oldUrl.replace(/\?.*/, "?start_date="+start.format('YYYY-MM-DD')+"&end_date="+end.format('YYYY-MM-DD')); // Create new url
                 let newUrlExport = oldUrlExport.replace(/\?.*/, "?start_date="+start.format('YYYY-MM-DD')+"&end_date="+end.format('YYYY-MM-DD')); // Create new url
 

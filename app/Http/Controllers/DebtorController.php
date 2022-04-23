@@ -8,6 +8,7 @@ use App\Http\Requests\ExportDebtorsRequest;
 use App\Http\Traits\ApiResponsable;
 use App\Models\Debtor;
 use App\Models\File;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -106,6 +107,13 @@ class DebtorController extends Controller
         get();
 
         return view('debtor.index', compact('debtors'));
+    }
+
+    public function filter(Request $request)
+    {
+        $debtors = Debtor::whereBetween('start_date', [Carbon::parse($request->start_date)->startOfDay(),
+            Carbon::parse($request->end_date)->endOfDay()])->get();
+        dd($debtors);
     }
 
     public function export(ExportDebtorsRequest $request)

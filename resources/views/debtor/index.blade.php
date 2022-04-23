@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
+@section('plugins.daterangepicker', true)
 
 @section('content_header')
     <div class="container-fluid">
@@ -12,17 +13,19 @@
                 <a href="{{route('debtor.create')}}" type="button" class="btn btn-block btn-primary">Добавить
                     должника</a>
             </div>
+
         </div>
     </div>
 @stop
 
 @section('content')
     <div class="row">
-        <div class="col-md-6 ">
+        <div class="col-md-4 ">
             <form action="{{route("debtor.search")}}" method=get>
                 @csrf
                 <div class="input-group">
-                    <input type="search" class="form-control form-control-md" name="search" placeholder="Поиск должника">
+                    <input type="search" class="form-control form-control-md" name="search"
+                           placeholder="Поиск должника">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-md btn-default">
                             <i class="fa fa-search"></i>
@@ -31,18 +34,21 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6 ">
-            <form action="simple-results.html">
+        <div class="col-6 row offset-2">
+            <a id="filter" href="{{route('debtor.filter')}}?">Filter</a>
+            <a id="exportByDate" href="{{route('debtor.exportByDate')}}?">Filter</a>
+
+            <div class="form-group">
                 <div class="input-group">
-                    <input type="search" class="form-control form-control-md" placeholder="Type your keywords here">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-md btn-default">
-                            <i class="fa fa-search"></i>
-                        </button>
+                    <div id="reportrange"
+                         style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <span></span> <i class="fa fa-caret-down"></i>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div></div>
+    </div>
+
     </div>
 
     <table class="table table-bordered">
@@ -102,4 +108,50 @@
 
         </tbody>
     </table>
+@endsection
+@section('js')
+    <script type="text/javascript">
+        $(function () {
+
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+            addDataRangesToURL(start, end);
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+            }
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Сегодня': [moment(), moment()],
+                    'Вчера': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Последние 7 дней': [moment().subtract(6, 'days'), moment()],
+                    'Последние 30 дней': [moment().subtract(29, 'days'), moment()],
+                    'Этот месяц': [moment().startOf('month'), moment().endOf('month')],
+                    'Прошлый месяц': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            cb(start, end);
+
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                addDataRangesToURL(picker.startDate, picker.endDate);
+            });
+
+            function addDataRangesToURL(start, end) {
+                let href = $('#filter');
+                let hrefExport = $('#exportByDate')
+                let oldUrl = href.attr("href"); // Get current url
+                let oldurlExport = hrefExport.attr("href");
+                let newUrl = oldUrl.replace(/\?.*/, "?start_date="+start.format('YYYY-MM-DD')+"&end_date="+end.format('YYYY-MM-DD')); // Create new url
+                let newUrlExport = oldUrlExport.replace(/\?.*/, "?start_date="+start.format('YYYY-MM-DD')+"&end_date="+end.format('YYYY-MM-DD')); // Create new url
+
+                href.attr("href", newUrl); // Set href value
+                hrefExport.attr("href", newUrlExport);
+            }
+        });
+
+    </script>
 @endsection

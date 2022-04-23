@@ -48,7 +48,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
 
 
     Route::post('file/store', [FileController::class, 'store'])->name('file.store');
-    Route::delete('file/delete/{}', [FileController::class, 'destroy'])->name('file.delete');
+    Route::delete('file/delete', [FileController::class, 'destroy'])->name('file.delete');
 
 });
 

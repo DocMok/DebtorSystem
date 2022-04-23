@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    @if(Auth:user() && Auth::user()->is_admin)
+    @if(Auth::user() && Auth::user()->is_admin)
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -42,7 +42,7 @@
             <th style="width: 10px">#</th>
             <th style="width: 40%">Имя</th>
             <th style="width: 25%">Почта</th>
-            <th style="width: 35%">действия</th>
+            <th style="width: 35%">Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -53,12 +53,12 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>
-                    @if(Auth:user() && Auth::user()->is_admin)
+                    @if(Auth::user() && Auth::user()->is_admin)
                 <form class='card-title' method=get
                       action="{{route('user.edit', $user->id)}}" style="margin:2px;">
                     @csrf
                     <button class=" btn btn-block btn-dark btn-sm" type="submit">
-                        <i class="fas fa-pencil-alt mr-1"></i>
+                        <i class="fas fa-pencil-alt"></i>
                     </button>
                     <input type='hidden' name="user_id" value="{{$user->id}}">
                 </form>

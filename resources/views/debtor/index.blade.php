@@ -9,10 +9,12 @@
             <div class="col-sm-6">
                 <h1 class="m-0">Список должников</h1>
             </div>
+            @if(Auth::user() && Auth::user()->is_admin)
             <div class="col-sm-3 breadcrumb float-sm-right">
                 <a href="{{route('debtor.create')}}" type="button" class="btn btn-block btn-primary">Добавить
                     должника</a>
             </div>
+                @endif
 
         </div>
     </div>
@@ -59,7 +61,7 @@
             <th style="width: 10px">#</th>
             <th style="width: 40%">ФИО</th>
             <th style="width: 25%">Долг</th>
-            <th style="width: 35%">действия</th>
+            <th style="width: 35%">Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -70,6 +72,7 @@
                 <td>{{$debtor->name}}</td>
                 <td>{{$debtor->debit_sum}}</td>
                 <td>
+                    @if(Auth::user() && Auth::user()->is_admin)
                     <form class='card-title' method=get
                           action="{{route('debtor.show', $debtor->id)}}" style="margin:2px;">
                         @csrf
@@ -83,7 +86,7 @@
                           action="{{route('debtor.edit', $debtor->id)}}" style="margin:2px;">
                         @csrf
                         <button class=" btn btn-block btn-dark btn-sm" type="submit">
-                            <i class="fas fa-pencil-alt mr-1"></i>
+                            <i class="fas fa-pencil-alt"></i>
                         </button>
                     </form>
 
@@ -95,11 +98,11 @@
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
-
+@endif
                     <form class='card-title' method=get
                           action="{{route('debtor.export', $debtor->id)}}" style="margin:2px;">
                         @csrf
-                        <button class="btn btn-block btn-warning btn-flat btn-sm" type="submit">
+                        <button class="btn btn-block btn-warning btn-sm" type="submit">
                             <i class="far fa-fw fa-file-word"></i>
                         </button>
                     </form>

@@ -128,13 +128,13 @@ class DebtorController extends Controller
             'ФИО должника', 'ИИН должника', 'Адрес должника', 'Наименование органа (ЧСИ)',
             'БИН органа', 'Номер исполнительного производства', 'Дата вступления в силу',
             'Сумма задолженности', 'Наименование блокировки счета',
-            'Арест в пользу'];
+            'Арест в пользу', 'Дата добавления'];
 
         $spreadsheet = new Spreadsheet();
         $data[] = $headers;
         foreach ($debtors as $debtor) {
             $data[] = [$debtor->name, $debtor->iin, $debtor->address, $debtor->chsi, $debtor->bin, $debtor->nip,
-                $debtor->start_date, $debtor->debit_sum, $debtor->account_block_name, $debtor->arrest_to];
+                $debtor->start_date, $debtor->debit_sum, $debtor->account_block_name, $debtor->arrest_to, $debtor->created_at];
         }
 
         $spreadsheet->getActiveSheet()->setTitle('Должники')->fromArray($data);
@@ -152,12 +152,12 @@ class DebtorController extends Controller
             'ФИО должника', 'ИИН должника', 'Адрес должника', 'Наименование органа (ЧСИ)',
             'БИН органа', 'Номер исполнительного производства', 'Дата вступления в силу',
             'Сумма задолженности', 'Наименование блокировки счета',
-            'Арест в пользу'];
+            'Арест в пользу', 'Дата добавления'];
 
         $spreadsheet = new Spreadsheet();
         $data[] = $headers;
         $data[] = [$debtor->name, $debtor->iin, $debtor->address, $debtor->chsi, $debtor->bin, $debtor->nip,
-            $debtor->start_date, $debtor->debit_sum, $debtor->account_block_name, $debtor->arrest_to];
+            $debtor->start_date, $debtor->debit_sum, $debtor->account_block_name, $debtor->arrest_to, $debtor->created_at];
 
         $spreadsheet->getActiveSheet()->setTitle('Должники')->fromArray($data);
         $resource = tmpfile();

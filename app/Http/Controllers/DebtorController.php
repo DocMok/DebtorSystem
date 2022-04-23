@@ -142,6 +142,7 @@ class DebtorController extends Controller
 
         $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save($resource);
-        return Storage::disk('public')->put("export/debtors.xlsx", $resource);
+        Storage::disk('public')->put("export/debtors.xlsx", $resource);
+        return Storage::disk('public')->download("export/debtors.xlsx");
     }
 }

@@ -115,7 +115,7 @@ class DebtorController extends Controller
     {
         $debtors = Debtor::whereBetween('start_date', [Carbon::parse($request->start_date)->startOfDay(),
             Carbon::parse($request->end_date)->endOfDay()])->get();
-        dd($debtors);
+        return view('debtor.index', compact('debtors'));
     }
 
     public function exportByRange(ExportDebtorsRequest $request)

@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+    @if(Auth:user() && Auth::user()->is_admin)
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -13,6 +14,7 @@
                 </div>
             </div>
         </div>
+    @endif
 
 @stop
 
@@ -51,7 +53,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>
-
+                    @if(Auth:user() && Auth::user()->is_admin)
                 <form class='card-title' method=get
                       action="{{route('user.edit', $user->id)}}" style="margin:2px;">
                     @csrf
@@ -69,6 +71,7 @@
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>
+                        @endif
                 </td>
         @endforeach
 

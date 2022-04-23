@@ -10,6 +10,8 @@ use App\Models\Debtor;
 use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class DebtorController extends Controller
@@ -116,49 +118,30 @@ class DebtorController extends Controller
         dd($debtors);
     }
 
-    public function export(ExportDebtorsRequest $request)
+    public function exportByRange(ExportDebtorsRequest $request)
     {
-        $debtor = Debtor::all();
+        $debtors = Debtor::query()
+            ->whereBetween('created_at',
+                [Carbon::parse($request->start_date)->startOfDay(),
+                    Carbon::parse($request->end_date)->endOfDay()])->get();
         $headers = [
-            'Menu_id', 'Shop_id', 'Partner_id','Partner type', 'Shop name', 'Partner name', 'Views October 21', 'Views November 21',
-            'Views December 21', 'Views January 22', 'Views February 22', 'Views March 22', 'Views April 22'];
+            'ФИО должника', 'ИИН должника', 'Адрес должника','Наименование органа (ЧСИ)',
+            'БИН органа', 'Номер исполнительного производства', 'Дата вступления в силу',
+            'Сумма задолженности', 'Наименование блокировки счета',
+            'Арест в пользу'];
 
         $spreadsheet = new Spreadsheet();
         $data[] = $headers;
-        foreach ($menus as $menu) {
-            if (!$menu->shop_id) {
-                continue;
-            }
-            if ($menu->shop->partner_id) {
-                $partnerId = $menu->shop->partner_id;
-                $partnerType = 'partner';
-            } elseif ($menu->shop->master_id) {
-                $partnerId = $menu->shop->master_id;
-                $partnerType = 'master';
-            } else {
-                $partnerId = $menu->shop->slave_id;
-                $partnerType = 'slave';
-            }
-            $statistics = [];
-            foreach ($menu->visit_statistics as $statistic) {
-                $statistics[] = $statistic;
-            }
-            $data[] = array_merge([$menu->id,
-                $menu->shop_id,
-                $partnerId,
-                $partnerType,
-                $menu->shop->name,
-                $menu->shop->$partnerType->name,
-            ], $statistics);
+        foreach ($debtors as $debtor) {
+            $data[] = [$debtor->name, $debtor->iin, $debtor->address, $debtor->chsi, $debtor->bin, $debtor->nip,
+                $debtor->start_date, $debtor->debit_sum, $debtor->account_block_name, $debtor->arrest_to];
         }
 
-        $this->table($headers, $data);
-
-        $spreadsheet->getActiveSheet()->setTitle('Statistics')->fromArray($data);
+        $spreadsheet->getActiveSheet()->setTitle('Должники')->fromArray($data);
         $resource = tmpfile();
 
-        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
         $writer->save($resource);
-        return Storage::disk('public')->put("stat/stat-test.xlsx", $resource);
+        return Storage::disk('public')->put("export/debtors.xlsx", $resource);
     }
 }

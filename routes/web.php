@@ -33,7 +33,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::delete('/debtor/delete/{debtor}', [DebtorController::class, 'destroy'])->name('debtor.delete');
     Route::get('/debtor/search', [DebtorController::class, 'search'])->name('debtor.search');
     Route::get('/debtor/filter', [DebtorController::class, 'filter'])->name('debtor.filter');
-    Route::get('/debtor/export-by-date', [DebtorController::class, 'export'])->name('debtor.exportByDate');
+    Route::get('/debtor/export-by-date', [DebtorController::class, 'exportByRange'])->name('debtor.exportByDate');
 
 
 

@@ -97,7 +97,7 @@
                     </form>
 
                     <form class='card-title' method=get
-                          action="{{route('debtor.edit', $debtor->id)}}" style="margin:2px;">
+                          action="{{route('debtor.export', $debtor->id)}}" style="margin:2px;">
                         @csrf
                         <button class="btn btn-block btn-warning btn-flat btn-sm" type="submit">
                             <i class="far fa-fw fa-file-word"></i>
